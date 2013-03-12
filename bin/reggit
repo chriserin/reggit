@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'methadone'
+require 'reggit.rb'
+
+class App
+  include Methadone::Main
+  include Methadone::CLILogging
+
+  main do |command|
+    Reggit::Command.load
+    Reggit::Router.new.send(command.to_sym)
+  end
+
+  arg :command
+
+  version Reggit::VERSION
+
+  use_log_level_option
+
+  go!
+end
