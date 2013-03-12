@@ -57,5 +57,5 @@ Rake::RDocTask.new do |rd|
   rd.rdoc_files.include("README.rdoc","lib/**/*.rb","bin/**/*")
 end
 
-task :default => [:test,:features]
+task :default => [:test]
 

@@ -6,12 +6,16 @@ module Reggit
     def status
       check_success(status = StatusCommand.run)
       check_success(commit_difference = CommitDifferenceCommand.run(status.branch))
-      StatusView.render(status, commit_difference)
+      output = StatusView.new.render(status, commit_difference)
+      puts output
     end
 
     private
     def check_success(command)
-      exit $?.exitstatus unless $?.success?
+      unless $?.success?
+        puts command.command_line + " failed"
+        exit $?.exitstatus
+      end
     end
   end
 end

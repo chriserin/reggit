@@ -1,7 +1,8 @@
 module Reggit
   class CommitDifferenceCommand < Command
     def process_command(branch)
-      @output = `git log --oneline #{branch} ^master`
+      @command_line = "git log --oneline #{branch} ^master"
+      @output = `#{command_line}`
     end
 
     def count

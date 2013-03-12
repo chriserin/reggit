@@ -1,5 +1,7 @@
 module Reggit
   class Command
+    attr_accessor :command_line
+
     def self.load
       Dir[File.join(File.dirname(__FILE__), "commands", "*.rb")].each do |file|
         require file
@@ -8,7 +10,7 @@ module Reggit
 
     def self.run(*args)
       instance = self.new
-      instance.process_command(args)
+      instance.process_command(*args)
       return instance
     end
   end

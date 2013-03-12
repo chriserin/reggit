@@ -1,3 +1,5 @@
+require 'rainbow'
+
 module Reggit
   class StatusView
     TEMPLATE = <<-HEREDOC
@@ -18,13 +20,13 @@ module Reggit
       result = result.gsub('BRANCH_INFO', render_branch_info(commit_difference.count, status.branch))
     end
 
-    def render_branch_info(branch)
+    def render_branch_info(commit_difference_count, branch)
       branch = "  #{branch}  "
 
       colored_branch_master = "  master  ".background(:red).color(:black)
       unless branch =~ /master/
         colored_branch = branch.background('997100')
-        "\t\t\t\t #{colored_branch_master}#{"." * commit_difference.lines.count}#{colored_branch}"
+        "\t\t\t\t #{colored_branch_master}#{"." * commit_difference_count}#{colored_branch}"
       else
         "\t\t\t\t #{colored_branch_master}"
       end

@@ -1,7 +1,14 @@
+require 'reggit/text_range'
+
 module Reggit
   class StatusCommand < Command
+
+    def initialize
+      @command_line = "git status"
+    end
+
     def process_command(*args)
-      @output = `git status`
+      @output = `#{command_line}`
     end
 
     def branch
@@ -22,7 +29,7 @@ module Reggit
 
     def untracked_files
       range = TextRange.new("Untracked files", "EOF")
-      git_files(range)
+      git_files(range, false)
     end
 
     private
@@ -57,20 +64,5 @@ module Reggit
       end
     end
 
-    class TextRange
-      def initialize(start_text, end_text)
-        @start_text, @end_text = start_text, end_text
-      end
-
-      def range_regex
-        return %r{#{@start_text}.*?\n(.*$)}m if @end_text == "EOF"
-        %r{#{@start_text}.*?\n(.*\n)(.*#{@end_text}.*?\n)}m
-      end
-
-      def lines(text)
-        match = text.match(range_regex)
-        match[1]
-      end
-    end
   end
 end
