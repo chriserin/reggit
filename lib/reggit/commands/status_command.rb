@@ -40,7 +40,7 @@ module Reggit
       result_lines.each do |line|
         next unless not line =~ /\(.*\)/ and line.length > 4
         if file_descriptor_should_exist
-          line.match(/#\s*([\w\s]*):\s*([.\w\d_:\/-]*)/)
+          line.match(/#\s*([\w\s]*):\s*(.*?)\Z/)
           results << {filename: $2, desc: get_descriptor($1)}
         else
           line.match(/#\s*([.\w\d_:\/-]*)/)
@@ -59,6 +59,8 @@ module Reggit
         'MOD'
       when 'deleted'
         'DEL'
+      when 'renamed'
+        'REN'
       else
         'XXX'
       end

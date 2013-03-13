@@ -38,7 +38,7 @@ module Reggit
       for file in files
         result << "\t #{file[:desc].color(:cyan)}  #{file[:filename]}\n"
       end
-      result + ?\n
+      result
     end
   end
 end

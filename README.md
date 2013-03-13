@@ -1,24 +1,22 @@
 # Reggit
 
-TODO: Write a gem description
+A simple git wrapper.  For better formatting.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'reggit'
+    gem 'reggit', github => "chriserin/reggit"
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install reggit
-
 ## Usage
 
-TODO: Write usage instructions here
+```
+reggit status
+```
 
 ## Contributing
 
